@@ -29,7 +29,7 @@ public class JpaTest {
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 		try {
-			test.createEmployees();
+			test.createEmployee();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,6 +55,23 @@ public class JpaTest {
 		}
 	}
 
+	
+	private void createEmployee() {
+		
+			Department department  = manager.find(Department.class, 1L);
+			
+			Employee employee = new Employee();
+			employee.setDepartment(department);
+			employee.setName("Sebas");
+			employee.setEmail("sebastianL@gmail.com");
+
+			manager.persist(employee);
+
+		
+	}
+
+	
+	
 
 	private void listEmployees() {
 		List<Employee> resultList = manager.createQuery("Select a From Employee a", Employee.class).getResultList();
